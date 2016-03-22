@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+  <!--[if lt IE 9]>
+  <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <title>Selenium Tutorial by arianekrumel</title>
+</head>
+
+<body>
+  <header>
+    <div class="inner">
+      <h1>Selenium Tutorial</h1>
+      <h2></h2>
+    </div>
+  </header>
+
+  <div id="content-wrapper">
+    <div class="inner clearfix">
+      <section id="main-content">
+        <h1>
+          <a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true">
+            <span aria-hidden="true" class="octicon octicon-link"></span></a>
+            Learn in 5 Minutes
+          </h1>
+
+          <div class="section" id="installing-the-ide">
+            <h2>Installing the IDE</h2>
+            <p>Using Firefox, first, download the IDE from the SeleniumHQ
+              <a href="http://seleniumhq.org/download/">downloads page</a>
+            </p>
+            <p>Firefox will protect you from installing addons from unfamiliar locations, so
+              you will need to click ‘Allow’ to proceed with the installation.
+            </p>
+            <p>When downloading from Firefox, you’ll be presented with the IDE window.</p>
+            <p>Select Install Now. The Firefox Add-ons window pops up, first showing a
+              progress bar, and when the download is complete.
+            </p>
+            <p>Restart Firefox.  After Firefox reboots you will find the Selenium-IDE listed under the Firefox Tools menu.</p>
+          </div>
+
+          <div class="section" id="opening-the-ide">
+            <h2>Opening the IDE</h2>
+            <p>To run the Selenium-IDE, simply select it from the Firefox Tools menu.  It opens
+              as follows with an empty script-editing window and a menu for loading, or
+              creating new test cases.
+            </p>
+          </div>
+          <div class="section" id="building-test-cases">
+            <h2>Building Test Cases</h2>
+            <div class="section" id="recording">
+              <h3>Recording<a class="headerlink" href="#recording" title="Permalink to this headline">¶</a></h3>
+              <p>Many first-time users begin by recording a test case from their interactions
+                with a website.  When Selenium-IDE is first opened, the record button is ON by
+                default. If you do not want Selenium-IDE to begin recording automatically you
+                can turn this off by going under Options &gt; Options... and deselecting
+                “Start recording immediately on open.”
+              </p>
+              <p>During recording, Selenium-IDE will automatically insert commands into your
+                test case based on
+                your actions.  Typically, this will include:
+              </p>
+              <ul class="simple">
+                <li>clicking a link - <em>click</em> or <em>clickAndWait</em> commands</li>
+                <li>entering values - <em>type</em> command</li>
+                <li>selecting options from a drop-down listbox - <em>select</em> command</li>
+                <li>clicking checkboxes or radio buttons - <em>click</em> command</li>
+              </ul>
+              <p>An illustration is shown below in <a href="#screenshot1">screenshot 1</a></p>
+              <p>Here are some “gotchas” to be aware of:</p>
+              <ul class="simple">
+                <li>The <em>type</em> command may require clicking on some other area of the web page
+                  for it to record.
+                </li>
+                <li>Following a link usually records a <em>click</em> command. You will often need to
+                  change this to <em>clickAndWait</em> to ensure your test case pauses until the new page
+                  is completely loaded.  Otherwise, your test case will continue running commands
+                  before the page has loaded all its UI elements. This will cause unexpected
+                  test case failures.
+                </li>
+              </ul>
+            </div>
+
+            <div class="section" id="adding-verifications-and-asserts-with-the-context-menu">
+              <h3>Adding Verifications and Asserts With the Context Menu</h3>
+              <p>Your test cases will also need to check the properties of a web-page.  This
+                requires <em>assert</em> and <em>verify</em> commands.  We won’t describe the specifics of
+                these commands here; that is in the chapter on <a class="reference internal" href="#selenium-commands-selenese">Selenium Commands – “Selenese”</a>.  Here we’ll
+                simply describe how to add them to your test case.
+              </p>
+              <p>With Selenium-IDE recording, go to the browser displaying your test application and
+                right click anywhere on the page.  You will see a context menu showing <em>verify</em>
+                and/or <em>assert</em> commands.
+              </p>
+              <p>An illustration is shown below in <a href="#screenshot2">screenshot 2</a></p>
+            </div>
+
+            <div class="section" id="running-test-cases">
+              <h2>Running Test Cases</h2>
+              <p>The IDE allows many options for running your test case. You can run a test case
+                all at once, stop and start it, run it one line at a time, run a single command
+                you are currently developing, and you can do a batch run of an entire test suite.
+                Execution of test cases is very flexible in the IDE.
+              </p>
+              <p>An illustration is shown below in <a href="#screenshot3">screenshot 3</a></p>
+            </div>
+          </div>
+
+          <div class="section" id="screenshots">
+            <h2>Screnshots</h2>
+            <ul>
+              <li id="screenshot1">
+                Screenshot 1
+                <img src="./images/learn-in-5/screentshot1.png">
+              </li>
+              <li id="screenshot2">
+                Screenshot 2
+                <img src="./images/learn-in-5/screentshot2.png">
+              </li>
+              <li id="screenshot3">
+                Screenshot 3
+                <img src="./images/learn-in-5/screentshot3.png">
+              </li>
+            </ul>
+          </div>
+
+          <div class="section" id="reference">
+            <h2>Reference</h2>
+            <p>Selenium-IDE Guide: http://www.seleniumhq.org/docs/02_selenium_ide.jsp</p>
+          </div>
+
+        </section>
+
+        <aside id="sidebar">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="overview.html">Overview</a></li>
+            <li><a href="demo.html">Demo Page</a></li>
+            <li>Tutorials
+              <ul>
+                <li><a href="learn-in-5.html">Learn in 5 Minutes</a></li>
+                <li><a href="learn-in-30.html">Learn in 30 Minutes</a></li>
+                <li><a href="learn-in-1.html">Learn in 1 Hour</a></li>
+              </ul>
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </body>
+  </html>

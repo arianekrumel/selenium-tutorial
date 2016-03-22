@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Selenium Tutorial by arianekrumel</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Selenium Tutorial</h1>
+        <h2></h2>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+            <a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Learn in 1 Hour</h1>
+          <div class="section" id="selenium-webdriver-s-drivers">
+            <h2>Selenium-WebDriver&#8217;s Drivers</h2>
+            <p>WebDriver is the name of the key interface against which tests should be written, but there are several implementations. These include:</p>
+            <div class="section" id="htmlunit-driver">
+              <h3>HtmlUnit Driver</h3>
+              <p>This is currently the fastest and most lightweight implementation of WebDriver. As the name suggests, this is based on HtmlUnit. HtmlUnit is a java based implementation of a WebBrowser without a GUI. For any language binding (other than java) the Selenium Server is required to use this driver.</p>
+              <div class="section" id="usage">
+                <h4>Usage</h4>
+                <div class="highlight-java"><div class="highlight"><pre><span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HtmlUnitDriver</span><span class="o">();</span></pre></div>
+                </div>
+              </div>
+              <div class="section" id="pros">
+                <h4>Pros</h4>
+                <ul class="simple">
+                  <li>Fastest implementation of WebDriver</li>
+                  <li>A pure Java solution and so it is platform independent.</li>
+                  <li>Supports JavaScript</li>
+                </ul>
+              </div>
+              <div class="section" id="cons">
+                <h4>Cons</h4>
+                <ul class="simple">
+                  <li>Emulates other browsers&#8217; JavaScript behaviour (see below)</li>
+                </ul>
+              </div>
+              <div class="section" id="javascript-in-the-htmlunit-driver">
+                <h4>JavaScript in the HtmlUnit Driver</h4>
+                <p>None of the popular browsers uses the JavaScript engine used by HtmlUnit (Rhino). If you test JavaScript using HtmlUnit the results may differ significantly from those browsers.</p>
+                <p>When we say &#8220;JavaScript&#8221; we actually mean &#8220;JavaScript and the DOM&#8221;. Although the DOM is defined by the W3C each browser has its own quirks and differences in their implementation of the DOM and in how JavaScript interacts with it. HtmlUnit has an impressively complete implementation of the DOM and has good support for using JavaScript, but it is no different from any other browser: it has its own quirks and differences from both the W3C standard and the DOM implementations of the major browsers, despite its ability to mimic other browsers.</p>
+                <p>With WebDriver, we had to make a choice; do we enable HtmlUnit&#8217;s JavaScript capabilities and run the risk of teams running into problems that only manifest themselves there, or do we leave JavaScript disabled, knowing that there are more and more sites that rely on JavaScript? We took the conservative approach, and by default have disabled support when we use HtmlUnit. With each release of both WebDriver and HtmlUnit, we reassess this decision: we hope to enable JavaScript by default on the HtmlUnit at some point.</p>
+              </div>
+              <div class="section" id="enabling-javascript">
+                <h4>Enabling JavaScript</h4>
+                <p>If you can&#8217;t wait, enabling JavaScript support is very easy:</p>
+                <div class="highlight-java"><div class="highlight"><pre><span class="n">HtmlUnitDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HtmlUnitDriver</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span></pre></div>
+                </div>
+                <p>This will cause the HtmlUnit Driver to emulate Firefox 3.6&#8217;s JavaScript handling by default.</p>
+              </div>
+            </div>
+            <div class="section" id="firefox-driver">
+              <h3>Firefox Driver</h3>
+              <p>Controls the <a class="reference external" href="http://getfirefox.com">Firefox</a> browser using a Firefox plugin. The Firefox Profile that is used is stripped down from what is installed on the machine to only include the Selenium WebDriver.xpi (plugin). A few settings are also changed by default (<a class="reference external" href="https://github.com/SeleniumHQ/selenium/blob/master/javascript/firefox-driver/webdriver.json">see the source to see which ones</a>) Firefox Driver is capable of being run and is tested on Windows, Mac, Linux. Currently on versions 3.6, 10, latest - 1, latest</p>
+              <div class="section" id="id1">
+                <h4>Usage</h4>
+                <div class="highlight-java"><div class="highlight"><pre><span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FirefoxDriver</span><span class="o">();</span></pre></div>
+                </div>
+              </div>
+              <div class="section" id="id2">
+                <h4>Pros</h4>
+                <ul class="simple">
+                  <li>Runs in a real browser and supports JavaScript</li>
+                  <li>Faster than the <a class="reference internal" href="#internet-explorer-driver">Internet Explorer Driver</a></li>
+                </ul>
+              </div>
+              <div class="section" id="id3">
+                <h4>Cons</h4>
+                <ul class="simple">
+                  <li>Slower than the <a class="reference internal" href="#htmlunit-driver">HtmlUnit Driver</a></li>
+                </ul>
+              </div>
+              <div class="section" id="modifying-the-firefox-profile">
+                <h4>Modifying the Firefox Profile</h4>
+                <p>Suppose that you wanted to modify the user agent string (as above), but you&#8217;ve got a tricked out Firefox profile that contains dozens of useful extensions. There are two ways to obtain this profile. Assuming that the profile has been created using Firefox&#8217;s profile manager (<code class="docutils literal"><span class="pre">firefox</span> <span class="pre">-ProfileManager</span></code>):</p>
+                <div class="highlight-java"><div class="highlight"><pre><span class="n">ProfilesIni</span> <span class="n">allProfiles</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ProfilesIni</span><span class="o">();</span><span class="n">FirefoxProfile</span> <span class="n">profile</span> <span class="o">=</span> <span class="n">allProfiles</span><span class="o">.</span><span class="na">getProfile</span><span class="o">(</span><span class="s">&quot;WebDriver&quot;</span><span class="o">);</span><span class="n">profile</span><span class="o">.</span><span class="na">setPreferences</span><span class="o">(</span><span class="s">&quot;foo.bar&quot;</span><span class="o">,</span> <span class="mi">23</span><span class="o">);</span><span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FirefoxDriver</span><span class="o">(</span><span class="n">profile</span><span class="o">);</span></pre></div></div>
+                <p>Alternatively, if the profile isn&#8217;t already registered with Firefox:</p>
+                <div class="highlight-java"><div class="highlight"><pre><span class="n">File</span> <span class="n">profileDir</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;path/to/top/level/of/profile&quot;</span><span class="o">);</span><span class="n">FirefoxProfile</span> <span class="n">profile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FirefoxProfile</span><span class="o">(</span><span class="n">profileDir</span><span class="o">);</span><span class="n">profile</span><span class="o">.</span><span class="na">addAdditionalPreferences</span><span class="o">(</span><span class="n">extraPrefs</span><span class="o">);</span><span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FirefoxDriver</span><span class="o">(</span><span class="n">profile</span><span class="o">);</span></pre></div></div>
+                <p>As we develop features in the <a class="reference internal" href="#firefox-driver">Firefox Driver</a>, we expose the ability to use them. For example, until we feel native events are stable on Firefox for Linux, they are disabled by default. To enable them:</p>
+                <div class="highlight-java"><div class="highlight"><pre><span class="n">FirefoxProfile</span> <span class="n">profile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FirefoxProfile</span><span class="o">();</span><span class="n">profile</span><span class="o">.</span><span class="na">setEnableNativeEvents</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span><span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FirefoxDriver</span><span class="o">(</span><span class="n">profile</span><span class="o">);</span></pre></div></div>
+              </div>
+              <div class="section" id="info">
+                <h4>Info</h4>
+                <p>See the <a class="reference external" href="https://github.com/SeleniumHQ/selenium/wiki/FirefoxDriver">Firefox section in the wiki page</a> for the most up to date info.</p>
+              </div>
+            </div>
+            <div class="section" id="internet-explorer-driver">
+              <h3>Internet Explorer Driver</h3>
+              <p>The InternetExplorerDriver is a standalone server which implements WebDriver&#8217;s wire protocol. This driver has been tested with IE 7, 8, 9, 10, and 11 on appropriate combinations of Vista, Windows 7, Windows 8, and Windows 8.1. As of 15 April 2014, IE 6 is no longer supported.</p>
+              <p>The driver supports running 32-bit and 64-bit versions of the browser. The choice of how to determine which &#8220;bit-ness&#8221; to use in launching the browser depends on which version of the IEDriverServer.exe is launched. If the 32-bit version of IEDriverServer.exe is launched, the 32-bit version of IE will be launched. Similarly, if the 64-bit version of IEDriverServer.exe is launched, the 64-bit version of IE will be launched.</p>
+              <div class="section" id="id4">
+                <h4>Usage</h4>
+                <div class="highlight-java"><div class="highlight"><pre><span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InternetExplorerDriver</span><span class="o">();</span></pre></div>
+                </div>
+              </div>
+              <div class="section" id="id5">
+                <h4>Pros</h4>
+                <ul class="simple">
+                  <li>Runs in a real browser and supports Javascript</li>
+                </ul>
+              </div>
+              <div class="section" id="id6">
+                <h4>Cons</h4>
+                <ul class="simple">
+                  <li>Obviously the InternetExplorerDriver will only work on Windows!</li>
+                  <li>Comparatively slow (though still pretty snappy!)</li>
+                </ul>
+              </div>
+              <div class="section" id="id7">
+                <h4>Info</h4>
+                <p>See the <a class="reference external" href="https://github.com/SeleniumHQ/selenium/wiki/InternetExplorerDriver">Internet Explorer section of the wiki page</a> for the most up to date info. Please take special note of the Required Configuration section.</p>
+              </div>
+            </div>
+            <div class="section" id="chromedriver">
+              <h3>ChromeDriver</h3>
+              <p>ChromeDriver is maintained / supported by the <a class="reference external" href="http://code.google.com/p/chromium/">Chromium</a> project iteslf. WebDriver works with Chrome through the chromedriver binary (found on the chromium project&#8217;s download page). You need to have both chromedriver and a version of chrome browser installed. chromedriver needs to be placed somewhere on your system&#8217;s path in order for WebDriver to automatically discover it. The Chrome browser itself is discovered by chromedriver in the default installation path. These both can be overridden by environment variables. Please refer to <a class="reference external" href="https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver">the wiki</a> for more information.</p>
+              <div class="section" id="id8">
+                <h4>Usage</h4>
+                <div class="highlight-java"><div class="highlight"><pre><span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ChromeDriver</span><span class="o">();</span></pre></div>
+                </div>
+              </div>
+              <div class="section" id="id9">
+                <h4>Pros</h4>
+                <ul class="simple">
+                  <li>Runs in a real browser and supports JavaScript</li>
+                  <li>Because Chrome is a Webkit-based browser, the <a class="reference internal" href="#chromedriver">ChromeDriver</a> may allow you to verify that your site works in Safari. Note that since Chrome uses its own V8 JavaScript engine rather than Safari&#8217;s Nitro engine, JavaScript execution may differ.</li>
+                </ul>
+              </div>
+              <div class="section" id="id10">
+                <h4>Cons</h4>
+                <ul class="simple">
+                  <li>Slower than the <a class="reference internal" href="#htmlunit-driver">HtmlUnit Driver</a></li>
+                </ul>
+              </div>
+              <div class="section" id="id11">
+                <h4>Info</h4>
+                <p><a class="reference external" href="https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver">See our wiki</a> for the most up to date info. More info can also be found on the <a class="reference external" href="/download/">downloads page</a></p>
+              </div>
+              <div class="section" id="getting-running-with-chromedriver">
+                <h4>Getting running with ChromeDriver</h4>
+                <p>Download the <a class="reference external" href="https://sites.google.com/a/chromium.org/chromedriver/">ChromeDriver executable</a> and follow the other instructions on the <a class="reference external" href="https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver">wiki page</a></p>
+              </div>
+            </div>
+            <div class="section" id="opera-driver">
+              <span id="seleniumrcemulation"></span>
+              <h3>Opera Driver</h3>
+              <p>See the <a class="reference external" href="https://github.com/SeleniumHQ/selenium/wiki/OperaDriver">Opera Driver wiki article</a> in the Selenium Wiki for information on using the Opera Driver.</p>
+            </div>
+            <div class="section" id="ios-driver">
+              <h3>iOS Drivers</h3>
+              <p>See either the <a class="reference external" href="http://ios-driver.github.io/ios-driver/">ios-driver</a> or <a class="reference external" href="http://appium.io">appium</a> projects.</p>
+            </div>
+            <div class="section" id="android-driver">
+              <h3>Android Driver<a class="headerlink" href="#android-driver" title="Permalink to this headline">¶</a></h3>
+              <p>See the <a class="reference external" href="http://selendroid.io">Selendroid project</a></p>
+            </div>
+          </div>
+          <div class="section" id="alternative-back-ends-mixing-webdriver-and-rc-technologies">
+            <h2>Alternative Back-Ends: Mixing WebDriver and RC Technologies</h2>
+            <div class="section" id="webdriver-backed-selenium-rc">
+              <h3>WebDriver-Backed Selenium-RC</h3>
+              <p>The Java version of WebDriver provides an implementation of the Selenium-RC API.  These means that you can use the underlying WebDriver technology using the Selenium-RC API.  This is primarily provided for backwards compatibility.  It allows those who have existing test suites using the Selenium-RC API to use WebDriver under the covers.  It&#8217;s provided to help ease the migration path to Selenium-WebDriver.  Also, this allows one to use both APIs, side-by-side, in the same test code.</p>
+              <p>Selenium-WebDriver is used like this:</p>
+              <div class="highlight-java"><div class="highlight"><pre><span class="c1">// You may use any WebDriver implementation. Firefox is used here as an example</span><span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FirefoxDriver</span><span class="o">();</span><span class="c1">// A &quot;base url&quot;, used by selenium to resolve relative URLs</span><span class="n">String</span> <span class="n">baseUrl</span> <span class="o">=</span> <span class="s">&quot;http://www.google.com&quot;</span><span class="o">;</span><span class="c1">// Create the Selenium implementation</span><span class="n">Selenium</span> <span class="n">selenium</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WebDriverBackedSelenium</span><span class="o">(</span><span class="n">driver</span><span class="o">,</span> <span class="n">baseUrl</span><span class="o">);</span><span class="c1">// Perform actions with selenium</span><span class="n">selenium</span><span class="o">.</span><span class="na">open</span><span class="o">(</span><span class="s">&quot;http://www.google.com&quot;</span><span class="o">);</span><span class="n">selenium</span><span class="o">.</span><span class="na">type</span><span class="o">(</span><span class="s">&quot;name=q&quot;</span><span class="o">,</span> <span class="s">&quot;cheese&quot;</span><span class="o">);</span><span class="n">selenium</span><span class="o">.</span><span class="na">click</span><span class="o">(</span><span class="s">&quot;name=btnG&quot;</span><span class="o">);</span><span class="c1">// Get the underlying WebDriver implementation back. This will refer to the</span><span class="c1">// same WebDriver instance as the &quot;driver&quot; variable above.</span><span class="n">WebDriver</span> <span class="n">driverInstance</span> <span class="o">=</span> <span class="o">((</span><span class="n">WebDriverBackedSelenium</span><span class="o">)</span> <span class="n">selenium</span><span class="o">).</span><span class="na">getWrappedDriver</span><span class="o">();</span><span class="c1">//Finally, close the browser. Call stop on the WebDriverBackedSelenium instance</span><span class="c1">//instead of calling driver.quit(). Otherwise, the JVM will continue running after</span><span class="c1">//the browser has been closed.</span><span class="n">selenium</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span></pre></div>
+              </div>
+              <div class="section" id="id13">
+                <h4>Pros</h4>
+                <ul class="simple">
+                  <li>Allows for the WebDriver and Selenium APIs to live side-by-side</li>
+                  <li>Provides a simple mechanism for a managed migration from the Selenium RC API to WebDriver&#8217;s</li>
+                  <li>Does not require the standalone Selenium RC server to be run</li>
+                </ul>
+              </div>
+              <div class="section" id="id14">
+                <h4>Cons</h4>
+                <ul class="simple">
+                  <li>Does not implement every method</li>
+                  <li>More advanced Selenium usage (using &#8220;browserbot&#8221; or other built-in JavaScript methods from Selenium Core) may not work</li>
+                  <li>Some methods may be slower due to underlying implementation differences</li>
+                </ul>
+              </div>
+            </div>
+            <div class="section" id="backing-webdriver-with-selenium">
+              <h3>Backing WebDriver with Selenium</h3>
+              <p>WebDriver doesn&#8217;t support as many browsers as Selenium RC does, so in order to provide that support while still using the WebDriver API, you can make use of the <code class="docutils literal"><span class="pre">SeleneseCommandExecutor</span></code></p>
+              <p>Safari is supported in this way with the following code (be sure to disable pop-up blocking):</p>
+              <div class="highlight-java"><div class="highlight"><pre><span class="n">DesiredCapabilities</span> <span class="n">capabilities</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DesiredCapabilities</span><span class="o">();</span><span class="n">capabilities</span><span class="o">.</span><span class="na">setBrowserName</span><span class="o">(</span><span class="s">&quot;safari&quot;</span><span class="o">);</span><span class="n">CommandExecutor</span> <span class="n">executor</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SeleneseCommandExecutor</span><span class="o">(</span><span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">&quot;http://localhost:4444/&quot;</span><span class="o">),</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">&quot;http://www.google.com/&quot;</span><span class="o">),</span> <span class="n">capabilities</span><span class="o">);</span><span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RemoteWebDriver</span><span class="o">(</span><span class="n">executor</span><span class="o">,</span> <span class="n">capabilities</span><span class="o">);</span></pre></div>
+              </div>
+              <p>There are currently some major limitations with this approach, notably that findElements doesn&#8217;t work as expected. Also, because we&#8217;re using Selenium Core for the heavy lifting of driving the browser, you are limited by the JavaScript sandbox.</p>
+            </div>
+          </div>
+          <div class="section" id="running-standalone-selenium-server-for-use-with-remotedrivers">
+            <h2>Running Standalone Selenium Server for use with RemoteDrivers</h2>
+            <p>From <a class="reference external" href="http://selenium-release.storage.googleapis.com/index.html">Selenium&#8217;s Download page</a> download selenium-server-standalone-&lt;version&gt;.jar and optionally IEDriverServer. If you plan to work with Chrome, download it from <a class="reference external" href="http://chromedriver.googlecode.com/">Google Code</a>.</p>
+            <p>Unpack IEDriverServer and/or chromedriver and put them in a directory which is on the $PATH / %PATH% - the Selenium Server should then be able to handle requests for IE / Chrome without additional modifications.</p>
+            <p>Start the server on the command line with</p>
+            <div class="highlight-bash"><div class="highlight"><pre>java -jar &lt;path_to&gt;/selenium-server-standalone-&lt;version&gt;.jar</pre></div>
+            </div>
+            <p>If you want to use native events functionality, indicate this on the command line with the option</p>
+            <div class="highlight-bash"><div class="highlight"><pre>-Dwebdriver.enable.native.events<span class="o">=</span>1</pre></div>
+            </div>
+            <p>For other command line options, execute</p>
+            <div class="highlight-bash"><div class="highlight"><pre>java -jar &lt;path_to&gt;/selenium-server-standalone-&lt;version&gt;.jar -help</pre></div>
+            </div>
+            <p>In order to function properly, the following ports should be allowed incoming TCP connections: 4444, 7054-5 (or twice as many ports as the number of concurrent instances you plan to run). Under Windows, you may need to unblock the applications as well.</p>
+          </div>
+          <div class="section" id="additional-resources">
+            <span id="seleniumwebdriverwiki"></span>
+            <h2>Additional Resources</h2>
+            <p>You can find further resources for WebDriver in <a class="reference external" href="https://github.com/SeleniumHQ/selenium/wiki/FurtherResources">WebDriver&#8217;s wiki</a></p>
+            <p>Of course, don&#8217;t hesitate to do an internet search on any Selenium topic, including Selenium-WebDriver&#8217;s drivers.  There are quite a few blogs on Selenium along with numerous posts on various user forums.  Additionally the Selenium User&#8217;s Group is a great resource. <a class="reference external" href="http://groups.google.com/group/selenium-users">http://groups.google.com/group/selenium-users</a></p>
+          </div>
+          <div class="section" id="explicit-and-implicit-waits">
+            <span id="explicit-and-implicit-waits-reference"></span>
+            <span id="chapter04-reference"></span>
+            <h2>Explicit and Implicit Waits</h2>
+            <p>Waiting is having the automated task execution elapse a certain amount of time before continuing with the next step. You should choose to use Explicit Waits or Implicit Waits.</p>
+            <p>WARNING: Do not mix implicit and explicit waits. Doing so can cause unpredictable wait times. For example setting an implicit wait of 10s and an explicit wait of 15 seconds, could cause a timeout to occur after 20 seconds.</p>
+            <div class="section" id="explicit-waits">
+              <h3>Explicit Waits</h3>
+              <p>An explicit waits is code you define to wait for a certain condition to occur before proceeding further in the code. The worst case of this is Thread.sleep(), which sets the condition to an exact time period to wait. There are some convenience methods provided that help you write code that will wait only as long as required. WebDriverWait in combination with ExpectedCondition is one way this can be accomplished.</p>
+              <div class="highlight-java"><div class="highlight"><pre><span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FirefoxDriver</span><span class="o">();</span><span class="n">driver</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;http://somedomain/url_that_delays_loading&quot;</span><span class="o">);</span><span class="n">WebElement</span> <span class="n">myDynamicElement</span> <span class="o">=</span> <span class="o">(</span><span class="k">new</span> <span class="n">WebDriverWait</span><span class="o">(</span><span class="n">driver</span><span class="o">,</span> <span class="mi">10</span><span class="o">))</span><span class="o">.</span><span class="na">until</span><span class="o">(</span><span class="n">ExpectedConditions</span><span class="o">.</span><span class="na">presenceOfElementLocated</span><span class="o">(</span><span class="n">By</span><span class="o">.</span><span class="na">id</span><span class="o">(</span><span class="s">&quot;myDynamicElement&quot;</span><span class="o">)));</span></pre></div>
+              </div>
+              <p>This waits up to 10 seconds before throwing a TimeoutException or if it finds the element will return it in 0 - 10 seconds. WebDriverWait by default calls the ExpectedCondition every 500 milliseconds until it returns successfully. A successful return is for ExpectedCondition type is Boolean return true or not null return value for all other ExpectedCondition types.</p>
+              <p>This example is also functionally equivalent to the first <a class="reference internal" href="#implicit-waits">Implicit Waits</a> example.</p>
+              <div class="section" id="expected-conditions">
+                <h4>Expected Conditions</h4>
+                <p>There are some common conditions that are frequently come across when automating web browsers. Listed below are Implementations of each. Java happens to have convienence methods so you don&#8217;t have to code an ExpectedCondition class yourself or create your own utility package for them.</p>
+                <ul class="simple">
+                  <li>Element is Clickable - it is Displayed and Enabled.</li>
+                </ul>
+                <div class="highlight-java"><div class="highlight"><pre><span class="n">WebDriverWait</span> <span class="n">wait</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WebDriverWait</span><span class="o">(</span><span class="n">driver</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span><span class="n">WebElement</span> <span class="n">element</span> <span class="o">=</span> <span class="n">wait</span><span class="o">.</span><span class="na">until</span><span class="o">(</span><span class="n">ExpectedConditions</span><span class="o">.</span><span class="na">elementToBeClickable</span><span class="o">(</span><span class="n">By</span><span class="o">.</span><span class="na">id</span><span class="o">(</span><span class="s">&quot;someid&quot;</span><span class="o">)));</span></pre></div>
+                </div>
+                <p>The ExpectedConditions package (<a class="reference external" href="https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/support/ui/ExpectedConditions.html">Java</a>)  (<a class="reference external" href="https://seleniumhq.github.io/selenium/docs/api/py/webdriver_support/selenium.webdriver.support.expected_conditions.html">Python</a>) (<a class="reference external" href="https://seleniumhq.github.io/selenium/docs/api/dotnet/html/AllMembers_T_OpenQA_Selenium_Support_UI_ExpectedConditions.htm">.NET</a>) contains a set of predefined conditions to use with WebDriverWait.</p>
+              </div>
+            </div>
+            <div class="section" id="implicit-waits">
+              <h3>Implicit Waits</h3>
+              <p>An implicit wait is to tell WebDriver to poll the DOM for a certain amount of time when trying to find an element or elements if they are not immediately available. The default setting is 0. Once set, the implicit wait is set for the life of the WebDriver object instance.</p>
+              <div class="highlight-java"><div class="highlight"><pre><span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FirefoxDriver</span><span class="o">();</span><span class="n">driver</span><span class="o">.</span><span class="na">manage</span><span class="o">().</span><span class="na">timeouts</span><span class="o">().</span><span class="na">implicitlyWait</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span><span class="n">driver</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;http://somedomain/url_that_delays_loading&quot;</span><span class="o">);</span><span class="n">WebElement</span> <span class="n">myDynamicElement</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="na">findElement</span><span class="o">(</span><span class="n">By</span><span class="o">.</span><span class="na">id</span><span class="o">(</span><span class="s">&quot;myDynamicElement&quot;</span><span class="o">));</span></pre></div>
+              </div>
+            </div>
+          <div class="section" id="remotewebdriver">
+            <h2>RemoteWebDriver</h2>
+            <div class="section" id="taking-a-screenshot">
+              <h3>Taking a Screenshot</h3>
+              <div class="highlight-java"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span><span class="kn">import</span> <span class="nn">java.net.URL</span><span class="o">;</span><span class="kn">import</span> <span class="nn">org.openqa.selenium.OutputType</span><span class="o">;</span><span class="kn">import</span> <span class="nn">org.openqa.selenium.TakesScreenshot</span><span class="o">;</span><span class="kn">import</span> <span class="nn">org.openqa.selenium.WebDriver</span><span class="o">;</span><span class="kn">import</span> <span class="nn">org.openqa.selenium.remote.Augmenter</span><span class="o">;</span><span class="kn">import</span> <span class="nn">org.openqa.selenium.remote.DesiredCapabilities</span><span class="o">;</span><span class="kn">import</span> <span class="nn">org.openqa.selenium.remote.RemoteWebDriver</span><span class="o">;</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Testing</span> <span class="o">{</span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">myTest</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span><span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RemoteWebDriver</span><span class="o">(</span><span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">&quot;http://localhost:4444/wd/hub&quot;</span><span class="o">),</span> <span class="n">DesiredCapabilities</span><span class="o">.</span><span class="na">firefox</span><span class="o">());</span><span class="n">driver</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;http://www.google.com&quot;</span><span class="o">);</span><span class="c1">// RemoteWebDriver does not implement the TakesScreenshot class</span><span class="c1">// if the driver does have the Capabilities to take a screenshot</span><span class="c1">// then Augmenter will add the TakesScreenshot methods to the instance</span><span class="n">WebDriver</span> <span class="n">augmentedDriver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Augmenter</span><span class="o">().</span><span class="na">augment</span><span class="o">(</span><span class="n">driver</span><span class="o">);</span><span class="n">File</span> <span class="n">screenshot</span> <span class="o">=</span> <span class="o">((</span><span class="n">TakesScreenshot</span><span class="o">)</span><span class="n">augmentedDriver</span><span class="o">).</span><span class="n">getScreenshotAs</span><span class="o">(</span><span class="n">OutputType</span><span class="o">.</span><span class="na">FILE</span><span class="o">);</span><span class="o">}</span><span class="o">}</span></pre></div>
+              </div>
+            </div>
+            <div class="section" id="using-a-firefoxprofile">
+              <h3>Using a FirefoxProfile</h3>
+              <div class="highlight-java"><div class="highlight"><pre><span class="n">FirefoxProfile</span> <span class="n">fp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FirefoxProfile</span><span class="o">();</span><span class="c1">// set something on the profile...</span><span class="n">DesiredCapabilities</span> <span class="n">dc</span> <span class="o">=</span> <span class="n">DesiredCapabilities</span><span class="o">.</span><span class="na">firefox</span><span class="o">();</span><span class="n">dc</span><span class="o">.</span><span class="na">setCapability</span><span class="o">(</span><span class="n">FirefoxDriver</span><span class="o">.</span><span class="na">PROFILE</span><span class="o">,</span> <span class="n">fp</span><span class="o">);</span><span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RemoteWebDriver</span><span class="o">(</span><span class="n">dc</span><span class="o">);</span></pre></div>
+              </div>
+            </div>
+            <div class="section" id="using-chromeoptions">
+              <h3>Using ChromeOptions</h3>
+              <div class="highlight-java"><div class="highlight"><pre><span class="n">ChromeOptions</span> <span class="n">options</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ChromeOptions</span><span class="o">();</span><span class="c1">// set some options</span><span class="n">DesiredCapabilities</span> <span class="n">dc</span> <span class="o">=</span> <span class="n">DesiredCapabilities</span><span class="o">.</span><span class="na">chrome</span><span class="o">();</span><span class="n">dc</span><span class="o">.</span><span class="na">setCapability</span><span class="o">(</span><span class="n">ChromeOptions</span><span class="o">.</span><span class="na">CAPABILITY</span><span class="o">,</span> <span class="n">options</span><span class="o">);</span><span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RemoteWebDriver</span><span class="o">(</span><span class="n">dc</span><span class="o">);</span></pre></div>
+            </div>
+          </div>
+          <div class="section" id="advanceduserinteractions">
+            <h2>AdvancedUserInteractions</h2>
+            <p>The Actions class(es) allow you to build a Chain of Actions and perform them. There are too many possible combinations to count. Below are a few of the common interactions that you may want to use. For a full list of actions please refer to the API docs <a class="reference external" href="https://seleniumhq.github.io/selenium/docs/api/java/index.html?org/openqa/selenium/interactions/Actions.html">Java</a> <a class="reference external" href="https://seleniumhq.github.io/selenium/docs/api/dotnet/html/AllMembers_T_OpenQA_Selenium_Interactions_Actions.htm">C#</a> <a class="reference external" href="https://seleniumhq.github.io/selenium/docs/api/rb/Selenium/WebDriver/ActionBuilder.html">Ruby</a> <a class="reference external" href="https://seleniumhq.github.io/selenium/docs/api/py/webdriver/selenium.webdriver.common.action_chains.html">Python</a></p>
+            <p>The Advanced User Interactions require native events to be enabled. Here&#8217;s a table of the current support Matrix for native events:</p>
+            <table border="1" class="docutils">
+              <colgroup>
+                <col width="19%" />
+                <col width="3%" />
+                <col width="3%" />
+                <col width="3%" />
+                <col width="3%" />
+                <col width="7%" />
+                <col width="7%" />
+                <col width="14%" />
+                <col width="12%" />
+                <col width="11%" />
+                <col width="6%" />
+                <col width="8%" />
+                <col width="3%" />
+              </colgroup>
+              <thead valign="bottom">
+                <tr class="row-odd">
+                  <th class="head">platform</th>
+                  <th class="head">IE6</th>
+                  <th class="head">IE7</th>
+                  <th class="head">IE8</th>
+                  <th class="head">IE9</th>
+                  <th class="head">FF3.6</th>
+                  <th class="head">FF10+</th>
+                  <th class="head">Chrome stable</th>
+                  <th class="head">Chrome beta</th>
+                  <th class="head">Chrome dev</th>
+                  <th class="head">Opera</th>
+                  <th class="head">Android</th>
+                  <th class="head">iOS</th>
+                </tr>
+              </thead>
+              <tbody valign="top">
+                <tr class="row-even">
+                  <td>Windows XP</td>
+                  <td>Y</td>
+                  <td>Y</td>
+                  <td>Y</td>
+                  <td>n/a</td>
+                  <td>Y</td>
+                  <td>Y</td>
+                  <td>Y</td>
+                  <td>Y</td>
+                  <td>Y</td>
+                  <td>?</td>
+                  <td>Y <a class="footnote-reference" href="#id9" id="id3">[1]</a></td>
+                  <td>n/a</td>
+                </tr>
+                <tr class="row-odd">
+                  <td>Windows 7</td>
+                  <td>n/a</td>
+                  <td>n/a</td>
+                  <td>Y</td>
+                  <td>Y</td>
+                  <td>Y</td>
+                  <td>Y</td>
+                  <td>Y</td>
+                  <td>Y</td>
+                  <td>Y</td>
+                  <td>?</td>
+                  <td>Y <a class="footnote-reference" href="#id9" id="id4">[1]</a></td>
+                  <td>n/a</td>
+                </tr>
+                <tr class="row-even">
+                  <td>Linux (Ubuntu)</td>
+                  <td>n/a</td>
+                  <td>n/a</td>
+                  <td>n/a</td>
+                  <td>n/a</td>
+                  <td>Y <a class="footnote-reference" href="#id10" id="id5">[2]</a></td>
+                  <td>Y <a class="footnote-reference" href="#id10" id="id6">[2]</a></td>
+                  <td>Y</td>
+                  <td>Y</td>
+                  <td>Y</td>
+                  <td>?</td>
+                  <td>Y <a class="footnote-reference" href="#id9" id="id7">[1]</a></td>
+                  <td>n/a</td>
+                </tr>
+                <tr class="row-odd">
+                  <td>Mac OSX</td>
+                  <td>n/a</td>
+                  <td>n/a</td>
+                  <td>n/a</td>
+                  <td>n/a</td>
+                  <td>N</td>
+                  <td>N</td>
+                  <td>Y</td>
+                  <td>Y</td>
+                  <td>Y</td>
+                  <td>?</td>
+                  <td>Y <a class="footnote-reference" href="#id9" id="id8">[1]</a></td>
+                  <td>N</td>
+                </tr>
+                <tr class="row-even">
+                  <td>Mobile Device</td>
+                  <td>n/a</td>
+                  <td>n/a</td>
+                  <td>n/a</td>
+                  <td>n/a</td>
+                  <td>n/a</td>
+                  <td>?</td>
+                  <td>n/a</td>
+                  <td>n/a</td>
+                  <td>n/a</td>
+                  <td>?</td>
+                  <td>Y</td>
+                  <td>N</td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="docutils footnote" frame="void" id="id9" rules="none">
+              <colgroup><col class="label" /><col /></colgroup>
+              <tbody valign="top">
+                <tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id4">2</a>, <a class="fn-backref" href="#id7">3</a>, <a class="fn-backref" href="#id8">4</a>)</em> Using the emulator</td></tr>
+              </tbody>
+            </table>
+            <table class="docutils footnote" frame="void" id="id10" rules="none">
+              <colgroup><col class="label" /><col /></colgroup>
+              <tbody valign="top">
+                <tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id5">1</a>, <a class="fn-backref" href="#id6">2</a>)</em> With explicitly enabling native events</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="section" id="browser-startup-manipulation">
+            <h2>Browser Startup Manipulation</h2>
+            <p>Todo</p>
+            <p>Topics to be included:</p>
+            <ul class="simple">
+              <li>restoring cookies</li>
+              <li>changing firefox profile</li>
+              <li>running browsers with plugins</li>
+            </ul>
+            <div class="section" id="using-a-proxy">
+              <h3>Using a Proxy</h3>
+              <div class="section" id="internet-explorer">
+                <h4>Internet Explorer</h4>
+                <p>The easiest and recommended way is to manually set the proxy on the machine that will be running the test. If that is not possible or you want your test to run with a different configuration or proxy, then you can use the following technique that uses a Capababilities object. This temporarily changes the system&#8217;s proxy settings and changes them back to the original state when done.</p>
+                <div class="highlight-java"><div class="highlight"><pre><span class="n">String</span> <span class="n">PROXY</span> <span class="o">=</span> <span class="s">&quot;localhost:8080&quot;</span><span class="o">;</span><span class="n">org</span><span class="o">.</span><span class="na">openqa</span><span class="o">.</span><span class="na">selenium</span><span class="o">.</span><span class="na">Proxy</span> <span class="n">proxy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">org</span><span class="o">.</span><span class="na">openqa</span><span class="o">.</span><span class="na">selenium</span><span class="o">.</span><span class="na">Proxy</span><span class="o">();</span><span class="n">proxy</span><span class="o">.</span><span class="na">setHttpProxy</span><span class="o">(</span><span class="n">PROXY</span><span class="o">)</span><span class="o">.</span><span class="na">setFtpProxy</span><span class="o">(</span><span class="n">PROXY</span><span class="o">)</span><span class="o">.</span><span class="na">setSslProxy</span><span class="o">(</span><span class="n">PROXY</span><span class="o">);</span><span class="n">DesiredCapabilities</span> <span class="n">cap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DesiredCapabilities</span><span class="o">();</span><span class="n">cap</span><span class="o">.</span><span class="na">setCapability</span><span class="o">(</span><span class="n">CapabilityType</span><span class="o">.</span><span class="na">PROXY</span><span class="o">,</span> <span class="n">proxy</span><span class="o">);</span><span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InternetExplorerDriver</span><span class="o">(</span><span class="n">cap</span><span class="o">);</span></pre></div>
+                </div>
+              </div>
+              <div class="section" id="chrome">
+                <h4>Chrome</h4>
+                <p>Is basically the same as internet explorer. It uses the same configuration on the machine as IE does (on windows). On Mac it uses the System Preference -&gt; Network settings. On Linux it uses (on Ubuntu) System &gt; Preferences &gt; Network Proxy Preferences (Alternatively in &#8220;/etc/environment&#8221; set http_proxy). As of this writing it is unknown how to set the proxy programmatically.</p>
+              </div>
+              <div class="section" id="firefox">
+                <h4>Firefox</h4>
+                <p>Firefox maintains its proxy configuration in a profile. You can preset the proxy in a profile and use that Firefox Profile or you can set it on profile that is created on the fly as is shown in the following example.</p>
+                <div class="highlight-java"><div class="highlight"><pre><span class="n">String</span> <span class="n">PROXY</span> <span class="o">=</span> <span class="s">&quot;localhost:8080&quot;</span><span class="o">;</span><span class="n">org</span><span class="o">.</span><span class="na">openqa</span><span class="o">.</span><span class="na">selenium</span><span class="o">.</span><span class="na">Proxy</span> <span class="n">proxy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">org</span><span class="o">.</span><span class="na">openqa</span><span class="o">.</span><span class="na">selenium</span><span class="o">.</span><span class="na">Proxy</span><span class="o">();</span><span class="n">proxy</span><span class="o">.</span><span class="na">setHttpProxy</span><span class="o">(</span><span class="n">PROXY</span><span class="o">)</span><span class="o">.</span><span class="na">setFtpProxy</span><span class="o">(</span><span class="n">PROXY</span><span class="o">)</span><span class="o">.</span><span class="na">setSslProxy</span><span class="o">(</span><span class="n">PROXY</span><span class="o">);</span><span class="n">DesiredCapabilities</span> <span class="n">cap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DesiredCapabilities</span><span class="o">();</span><span class="n">cap</span><span class="o">.</span><span class="na">setCapability</span><span class="o">(</span><span class="n">CapabilityType</span><span class="o">.</span><span class="na">PROXY</span><span class="o">,</span> <span class="n">proxy</span><span class="o">);</span><span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FirefoxDriver</span><span class="o">(</span><span class="n">cap</span><span class="o">);</span></pre></div>
+                </div>
+              </div>
+              <div class="section" id="opera">
+                <h4>Opera</h4>
+                <p>Todo</p>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <h2>Reference</h2>
+            <p>http://www.seleniumhq.org/docs/03_webdriver.jsp</p>
+            <p>http://www.seleniumhq.org/docs/04_webdriver_advanced.jsp</p>
+          </div>
+        </section>
+
+        <aside id="sidebar">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="overview.html">Overview</a></li>
+            <li><a href="demo.html">Demo Page</a></li>
+            <li>Tutorials
+              <ul>
+                <li><a href="learn-in-5.html">Learn in 5 Minutes</a></li>
+                <li><a href="learn-in-30.html">Learn in 30 Minutes</a></li>
+                <li><a href="learn-in-1.html">Learn in 1 Hour</a></li>
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+
+
+  </body>
+</html>
