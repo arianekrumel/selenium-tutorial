@@ -29,6 +29,51 @@
         <section id="main-content">
           <h3>
 <a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Learn in 30 Minutes</h3>
+
+<h4>Introduction to Web Driver</h4>
+
+<p>WebDriver is updated from the original Selenium RC in that it uses native browser API to drive automation instead of injecting JavaScript. WebDriver be used on browser directly or also with Selenium Server run scenarios such as running on other or virtual machines.</p>
+
+<h4>Common WebDriver Commands</h4>
+
+<h5>Locating UI Elements (WebElements) in Java</h5>
+
+<code>
+driver.findElement(By.id("coolestWidgetEvah"));
+driver.findElements(By.className("cheese"));
+driver.findElement(By.name("cheese"));
+driver.findElement(By.cssSelector("#food span.dairy.aged"));
+</code>
+
+<h5>User Input - Filling In Forms</h5>
+
+<code>
+driver.findElement(By.id("submit")).click();
+driver.findElement(By.tagName("select")).findElements(By.tagName("option"));
+</code>
+
+<h5>Moving Between Windows and Frames</h5>
+<code>
+driver.switchTo().window("windowName");
+driver.switchTo().frame("frameName");
+</code>
+
+<h5>Popup Dialogs</h5>
+<code>
+driver.switchTo().alert();
+</code>
+
+<h5>Navigation: History and Location</h5>
+<code>
+driver.navigate().to("http://www.example.com");
+</code>
+
+<h5>Cookies</h5>
+<code>
+driver.get("http://www.example.com");
+driver.manage().addCookie(new Cookie("key", "value"));
+</code>
+
         </section>
 
         <aside id="sidebar">
