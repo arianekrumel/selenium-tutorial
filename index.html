@@ -40,10 +40,17 @@
 <h3>
 <a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>About the Test Suite</h3>
 
+<p>Selenium started as a Thoughtwork project in 2004 for an automated testing framework. Selenium has a testing suite of projects that implement browser automation tools, APIs or frameworks. Here is some brief information about the WebDriver, Grid, IDE and Remote Control:</p>
+
 <ul>
-  <li>IDE</li>
-  <li>Web Driver</li>
-  <li>Remote Control</li>
+  <li><strong>Selenium Remote Control</strong><br />
+This first version had a client which sent commands and a server that drove the browser with a JavaScript engine. RC server accepts commands for the browser via HTTP.</li>
+  <li><strong>Selenium WebDriver</strong><br />
+This is a newer project compared to the RC used a methodology from a competitor named Web Driver that operated closer to the native browser API. It is implemented through a browser driver that receives commands and results. It uses a browser instance instead of a special server like the RC. It uses native operating system level functionality instead of browser-based JavaScript when possible.</li>
+  <li><strong>Selenium IDE</strong><br />
+This option is a Integrated Development Environment installed as a plug-in exclusively for the Mozilla Firefox browser. It has the functionality to recording and play interaction, select elements by text, ids, attributes and other commands to create automated tests. Also, it has the great benefit of replaying the test live in the browser so that testers can observe the testing sequence and visual layouts.</li>
+  <li><strong>Selenium Grid</strong><br />
+Selenium Grid is a project that uses one server acting as a hub to run tests on several remote machines. The test interact with the hub to obtain browser instances. The hub can spread the testing load across different machines, run tests in parallel and utilize servers with different platforms or operating systems.</li>
 </ul>
 
 <h3>
