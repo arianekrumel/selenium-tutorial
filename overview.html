@@ -274,6 +274,12 @@
             <h4>User Input - Filling In Forms</h4>
 
             <code>
+            WebElement select = driver.findElement(By.tagName("select"));
+            List<WebElement> allOptions = select.findElements(By.tagName("option"));
+            for (WebElement option : allOptions) {
+              System.out.println(String.format("Value is: %s", option.getAttribute("value")));
+              option.click();
+            }
             driver.findElement(By.id("submit")).click();
             driver.findElement(By.tagName("select")).findElements(By.tagName("option"));
             </code>
@@ -292,6 +298,34 @@
             <h4>Navigation: History and Location</h4>
             <code>
             driver.navigate().to("http://www.example.com");
+            </code>
+            <h4>Cookies</h4>
+            <code>
+            // Go to the correct domain
+            driver.get("http://www.example.com");
+
+            // Now set the cookie. This one's valid for the entire domain
+            Cookie cookie = new Cookie("key", "value");
+            driver.manage().addCookie(cookie);
+
+            // And now output all the available cookies for the current URL
+            Set<Cookie> allCookies = driver.manage().getCookies();
+              for (Cookie loadedCookie : allCookies) {
+              System.out.println(String.format("%s -> %s", loadedCookie.getName(), loadedCookie.getValue()));
+            }
+            // You can delete cookies in 3 ways
+            // By name
+            driver.manage().deleteCookieNamed("CookieName");
+            // By Cookie
+            driver.manage().deleteCookie(loadedCookie);
+            // Or all of them
+            driver.manage().deleteAllCookies();
+            </code>
+            <h4>Change the User Agent</h4>
+            <code>
+            FirefoxProfile profile = new FirefoxProfile();
+            profile.addAdditionalPreference("general.useragent.override", "some UA string");
+            WebDriver driver = new FirefoxDriver(profile);
             </code>
           </div>
 
