@@ -248,6 +248,7 @@
             </table>
           </div>
 
+<<<<<<< HEAD
           <div class="section" id="compatibility">
             <h2>Compatibility</h2>
             <h3>Browsers</h3>
@@ -278,6 +279,87 @@
                 <li>R</li>
                 <li>Ruby (RSpec, Test::Unit)</li>
               </ul>
+=======
+          <div class="section" id="api">
+            <h2>WebDriver API</h2>
+            <p>WebDriver is a tool for automating web testing which provides a friendly API for users can easily understand and maintain tests.</p>
+            <h3>Common WebDriver Commands</h3>
+
+            <h4>Locating UI Elements (WebElements) in Java</h4>
+            <h5>By Id</h5>
+            <code>
+            driver.findElement(By.id("coolestWidgetEvah"));
+            </code>
+            <h5>By Class Name</h5>
+            <code>
+              driver.findElements(By.className("cheese"));
+            </code>
+            <h5>By Name</h5>
+            <code>
+              driver.findElement(By.name("cheese"));
+            </code>
+            <h5>By CSS</h5>
+            <code>
+              driver.findElement(By.cssSelector("#food span.dairy.aged"));
+            </code>
+
+            <h4>User Input - Filling In Forms</h4>
+
+            <code>
+            WebElement select = driver.findElement(By.tagName("select"));
+            List<WebElement> allOptions = select.findElements(By.tagName("option"));
+            for (WebElement option : allOptions) {
+              System.out.println(String.format("Value is: %s", option.getAttribute("value")));
+              option.click();
+            }
+            driver.findElement(By.id("submit")).click();
+            driver.findElement(By.tagName("select")).findElements(By.tagName("option"));
+            </code>
+
+            <h4>Moving Between Windows and Frames</h4>
+            <code>
+            driver.switchTo().window("windowName");
+            driver.switchTo().frame("frameName");
+            </code>
+
+            <h4>Popup Dialogs</h4>
+            <code>
+            driver.switchTo().alert();
+            </code>
+
+            <h4>Navigation: History and Location</h4>
+            <code>
+            driver.navigate().to("http://www.example.com");
+            </code>
+            <h4>Cookies</h4>
+            <code>
+            // Go to the correct domain
+            driver.get("http://www.example.com");
+
+            // Now set the cookie. This one's valid for the entire domain
+            Cookie cookie = new Cookie("key", "value");
+            driver.manage().addCookie(cookie);
+
+            // And now output all the available cookies for the current URL
+            Set<Cookie> allCookies = driver.manage().getCookies();
+              for (Cookie loadedCookie : allCookies) {
+              System.out.println(String.format("%s -> %s", loadedCookie.getName(), loadedCookie.getValue()));
+            }
+            // You can delete cookies in 3 ways
+            // By name
+            driver.manage().deleteCookieNamed("CookieName");
+            // By Cookie
+            driver.manage().deleteCookie(loadedCookie);
+            // Or all of them
+            driver.manage().deleteAllCookies();
+            </code>
+            <h4>Change the User Agent</h4>
+            <code>
+            FirefoxProfile profile = new FirefoxProfile();
+            profile.addAdditionalPreference("general.useragent.override", "some UA string");
+            WebDriver driver = new FirefoxDriver(profile);
+            </code>
+>>>>>>> master
           </div>
 
           <div class="section" id="reference">
