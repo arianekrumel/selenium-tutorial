@@ -248,6 +248,53 @@
             </table>
           </div>
 
+          <div class="section" id="api">
+            <h2>WebDriver API</h2>
+            <p>WebDriver is a tool for automating web testing which provides a friendly API for users can easily understand and maintain tests.</p>
+            <h3>Common WebDriver Commands</h3>
+
+            <h4>Locating UI Elements (WebElements) in Java</h4>
+            <h5>By Id</h5>
+            <code>
+            driver.findElement(By.id("coolestWidgetEvah"));
+            </code>
+            <h5>By Class Name</h5>
+            <code>
+              driver.findElements(By.className("cheese"));
+            </code>
+            <h5>By Name</h5>
+            <code>
+              driver.findElement(By.name("cheese"));
+            </code>
+            <h5>By CSS</h5>
+            <code>
+              driver.findElement(By.cssSelector("#food span.dairy.aged"));
+            </code>
+
+            <h4>User Input - Filling In Forms</h4>
+
+            <code>
+            driver.findElement(By.id("submit")).click();
+            driver.findElement(By.tagName("select")).findElements(By.tagName("option"));
+            </code>
+
+            <h4>Moving Between Windows and Frames</h4>
+            <code>
+            driver.switchTo().window("windowName");
+            driver.switchTo().frame("frameName");
+            </code>
+
+            <h4>Popup Dialogs</h4>
+            <code>
+            driver.switchTo().alert();
+            </code>
+
+            <h4>Navigation: History and Location</h4>
+            <code>
+            driver.navigate().to("http://www.example.com");
+            </code>
+          </div>
+
           <div class="section" id="reference">
             <h2>Reference</h2>
             <p>Selenium Introduction: http://www.seleniumhq.org/docs/01_introducing_selenium.jsp</p>
